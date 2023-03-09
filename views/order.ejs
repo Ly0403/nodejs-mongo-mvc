@@ -1,0 +1,46 @@
+<%- include ('nav.ejs') %>
+<title>Orders</title>
+<div class="content">
+  <h2>Order List</h2>
+    
+  <input
+    type="text"
+    id="key"
+    class="form-control"
+    placeholder="Search"
+    onkeyup="searchOrder()"
+  />
+  <br />
+  
+  <ul id="item-list" class="list-group list-group-striped">
+    <% orderList %> <% for(let i = 0; i < orderList.length; i++) { %>
+    <li class="list-group-item">Customer No: <b><%=orderList[i].customerId%></b></li>
+    <li class="list-group-item">Product No: <b><%=orderList[i].productId%></b></li>
+    <li class="list-group-item">Order AMount: <b><%=orderList[i].orderAmount%></b></li>
+    <% } %>
+  </ul>
+  
+</div>
+    
+    <script src="/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      function searchOrder() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById("key");
+        key = input.value.toUpperCase();
+        ul = document.getElementById("item-list");
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+          b = li[i].getElementsByTagName("b")[0];
+          txtValue = b.textContent || b.innerText;
+          if (txtValue.toUpperCase().indexOf(key) > -1) {
+            li[i].style.display = "";
+          } else {
+            li[i].style.display = "none";
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

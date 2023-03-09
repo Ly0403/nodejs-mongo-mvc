@@ -1,0 +1,190 @@
+<%- include ('nav.ejs') %>  
+    <title>HomePage</title>
+        <div class="content">
+          <h3>Customer Form</h3>
+          <div class="form-group">
+            <label for="name">Customer Name</label>
+            <input
+              type="text"
+              name="name"
+              class="form-control"
+              id="name"
+              placeholder="Please enter customer name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="surname">Customer Surname</label>
+            <input
+              type="text"
+              class="form-control"
+              name="surname"
+              id="surname"
+              placeholder="Please enter customer surname"
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            onclick="addCustomerData()"
+          >
+            Save
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            onclick="location.href='/api/v1/customers';"
+          >
+            Customer API
+          </button>
+          <br />
+          <label id="lblAddCustomerError" class="text-danger"></label>
+          <h3>Product Form</h3>
+          <div class="form-group">
+            <label for="productName">Product Name</label>
+            <input
+              type="text"
+              name="productName"
+              class="form-control"
+              id="productName"
+              placeholder="Please enter product name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="price">Product Price</label>
+            <input
+              type="number"
+              class="form-control"
+              name="price"
+              id="price"
+              placeholder="Please enter product price"
+            />
+          </div>
+          <div class="form-group">
+            <label for="stock">Product Amount</label>
+            <input
+              type="number"
+              class="form-control"
+              name="stock"
+              id="stock"
+              placeholder="Please enter product amount"
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            onclick="addProductData()"
+          >
+            Save
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            onclick="location.href='/api/v1/products';"
+          >
+            Product API
+          </button>
+          <br />
+          <label id="lblAddProductError" class="text-danger"></label>
+          <h3>Order Form</h3>
+          <div class="form-group">
+            <label for="customerId">Customer No</label>
+            <input
+              type="number"
+              name="customerId"
+              class="form-control"
+              id="customerId"
+              placeholder="Please enter customer no"
+            />
+          </div>
+          <div class="form-group">
+            <label for="productId">Product No</label>
+            <input
+              type="number"
+              class="form-control"
+              name="productId"
+              id="productId"
+              placeholder="Please enter product no"
+            />
+          </div>
+          <div class="form-group">
+            <label for="orderAmount">Order Amount</label>
+            <input
+              type="number"
+              class="form-control"
+              name="orderAmount"
+              id="orderAmount"
+              placeholder="Please enter order amount"
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            onclick="addOrderData()"
+          >
+            Save
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            onclick="location.href='/api/v1/orders';"
+          >
+            Order API
+          </button>
+          <br />
+          <label id="lblAddOrderError" class="text-danger"></label>
+        </div>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/axios.min.js"></script>
+
+    <script>
+      function addCustomerData() {
+        var name = document.getElementById("name").value;
+        var surname = document.getElementById("surname").value;
+        axios
+          .post("/addCustomer", {
+            name: name,
+            surname: surname,
+          }).then((response)=>{
+            document.getElementById("lblAddCustomerError").innerHTML =
+            response.data;
+          });
+      }
+      function addOrderData() {
+        var productId = document.getElementById("productId").value;
+        var customerId = document.getElementById("customerId").value;
+        var orderAmount = document.getElementById("orderAmount").value;
+        axios
+          .post("/addOrder", {
+            productId: productId,
+            customerId: customerId,
+            orderAmount: orderAmount,
+          })
+          .then(function (response) {
+            if (response.status == 200) {
+              document.getElementById("lblAddOrderError").innerHTML =
+                response.data;
+            }
+          });
+      }
+      function addProductData() {
+        var productName = document.getElementById("productName").value;
+        var price = document.getElementById("price").value;
+        var stock = document.getElementById("stock").value;
+        axios
+          .post("/addProduct", {
+            productName: productName,
+            price: price,
+            stock: stock,
+            type: "product",
+          })
+          .then(function (response) {
+            if (response.status == 200) {
+              document.getElementById("lblAddProductError").innerHTML =
+                response.data;
+            }
+          });
+      }
+    </script>
+  </body>
+</html>

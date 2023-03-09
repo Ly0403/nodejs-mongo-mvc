@@ -1,0 +1,72 @@
+<%- include ('nav.ejs') %>
+  <title>Profile</title>
+  <h2>Profile</h2>
+  <div class="content profile">
+    <h5>Change your profile <%=user.username%></h5>
+    <ul id="item-list" class="list-group list-group-striped">
+      <li class="list-group-item">
+        <label for="username">Profile Image:</label>
+        <img src="/images/avatar.png" width="100">
+        <input type="file" id="myFile" name="filename">
+      </li>      
+      <li class="list-group-item">
+        <button class="btn btn-danger" onclick="updatePhoto()">Update</button>
+      </li>
+      <li class="list-group-item">
+        <label for="username">Username:</label>
+        <input id="username" value="<%=user.username%>" disabled>
+      </li>      
+      <li class="list-group-item">
+        <button class="btn btn-secondary" onclick="updateUsername()">Update</button>
+      </li>
+      <li class="list-group-item">
+        <label for="email">Email:</label>
+        <input id="email" type="email" value="<%=user.email%>" disabled>
+      </li>
+      <li class="list-group-item">
+        <label for="currentpassword">Current Password:</label>
+        <input id="currentpassword" type="password" disabled>
+      </li>
+      <li class="list-group-item">
+        <label for="newpasssword">New Password:</label>
+        <input id="newpasssword" type="password" disabled>
+      </li>
+      <li class="list-group-item">
+        <label for="newpassswordrepeat">New Password Repeat:</label>
+        <input id="newpassswordrepeat" type="password" disabled>
+      </li>
+      <li class="list-group-item">
+        <button class="btn btn-primary" onclick="updatePassword()">Update</button>
+      </li>
+      <li class="list-group-item">
+        <label id="error"></label>
+      </li>
+    </ul>
+  </div>
+  <script src="/js/bootstrap.bundle.min.js"></script>
+  <script src="/axios.min.js"></script>
+  <script>
+    function updateUsername() {
+      var username = document.getElementById("username").value;
+      axios
+        .post("/profile", {
+          username:username
+        }).then((response) => {
+          document.getElementById("error").innerHTML =
+            response.data;
+        });
+    }
+    document.getElementById("item-list").addEventListener("dblclick", enableFunc);
+    function enableFunc() {
+      var elements = document.getElementsByTagName('input');
+      for (var i = 0; i < elements.length; i++) {
+        if (elements[i].type != "email") {
+          elements[i].disabled = false;
+        }
+      }
+      document.getElementsByTagName("<input>").disabled = false;
+    }
+  </script>
+  </body>
+
+  </html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <link href="/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/register.css" />
+  <link rel="stylesheet" href="/css/home.css" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png" />
+  <link href='https://css.gg/log-out.css' rel='stylesheet'>
+  <link rel="manifest" href="/icon/site.webmanifest" />
+</head>
+
+<body>
+  <div class="sidebar">
+    <a href="/" class="active">Home</a>
+    <a href="/customers">Customers</a>
+    <a href="/products">Products</a>
+    <a href="/orders">Orders</a>
+    <a href="/profile"> <img src="/icon/favicon-32x32.png" />Welcome, <%=user.username%></a>
+    <a href="/logout">Log Out</a><i class="gg-log-out"></i>
+  </div>
+</body>
+
+</html>
