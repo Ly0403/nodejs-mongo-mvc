@@ -36,8 +36,8 @@ async function sendEmail(email, token, reason) {
   const mail = nodemailer.createTransport({
     service: "hotmail",
     auth: {
-      user: "nodejsmvctest@outlook.com",
-      pass: "QWEfgh123-",
+      user: "",
+      pass: "",
     },
   });
   if (reason == "emailapprove") {
